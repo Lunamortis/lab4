@@ -4,3 +4,5 @@ function addCard() {
     template.querySelector('.card-text').innerText = 'lorem ipsum ba nope yawn';
     document.querySelector('#card-list').appendChild(template);
 }
+
+addCard();
