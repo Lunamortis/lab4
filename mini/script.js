@@ -1,5 +1,4 @@
-function Numgen()
-{
+function Numgen() {
     var num = Math.floor(Math.random() * 100);
     return num;
 }
@@ -7,18 +6,16 @@ function Numgen()
 
 function getnewcard() {
     let randompost = Numgen();
-fetch('https://jsonplaceholder.typicode.com/posts/' + randompost)
-.then((response) => response.json())
-.then(function(json) {
-    console.log(json);
+    fetch('https://jsonplaceholder.typicode.com/posts/' + randompost)
+        .then((response) => response.json())
+        .then(function (json) {
+            console.log(json);
 
 
-    // for (let post of json)
-    // {
-    //     console.log(post); 
-    addCard(json);
-    // }
-});
+
+            addCard(json);
+
+        });
 }
 function addCard(post) {
     const template = document.getElementById('card-template').content.cloneNode(true);
@@ -28,7 +25,13 @@ function addCard(post) {
     document.querySelector('#card-list').appendChild(template);
 }
 
-// addCard();
+// custom scrollbar
+
+$(document).ready(function () {
+    if (!$.browser.webkit) {
+        $('.wrapper').html('<p>Sorry! Non webkit users. :(</p>');
+    }
+});
 
 
 

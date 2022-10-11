@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <template id="card-template">
+<template id="card-template">
     <div class="card mx-auto">
-        <img class= "card-img-top" src="" alt="">
+        <img class="card-img-top" src="" alt="">
         <div class="card-body">
             <div class="card-title"></div>
             <div class="card-text"></div>
-            
+
         </div>
     </div>
 </template>
@@ -24,11 +24,22 @@
 </head>
 
 <body>
-    <button onclick="getnewcard()"> hit me</button>
-    <div id="card-list"></div>
-    <script src="script.js"></script>
+    <div class="container">
+
+        <div class="cntrbtn"><button class="glow-on-hover" onclick="getnewcard()"> hit me</button></div>
+        <div id="card-list"></div>
+        <script src="script.js"></script>
+
+    </div>
+    <div id="wrapper">
+        <div class="scrollbar" id="style-default">
+            <div class="force-overflow"></div>
+        </div>
+
+        <div class="scrollbar" id="style-6">
+            <div class="force-overflow"></div>
+        </div>
+    </div>
 </body>
 
 </html>
-
-
