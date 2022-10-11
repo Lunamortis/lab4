@@ -1,13 +1,27 @@
 <!DOCTYPE html>
+<!-- this template holds data for each news item and uses bootstrap classes -->
+<template id="news-item">
+  <div class="col-lg-3 col-md-6 col-sm-12">
+  <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Card text</a>
+      </div>
+    </div>
+    </div>
+</template>
+
 <html>
+  <head><link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css"></head>
   <body>
     <h2>News</h2>
-    <form>
+    <form class="container">
       <label for="fname">news title:</label><br />
       <input type="text" id="newsTitle" name="newsTitle" /><br />
       <label for="lname">news content:</label><br />
       <input type="text" id="newsContent" name="newsContent" /><br /><br />
       <button id="update">submit</button>
+      <div id="news-items" class="row"></div>
       <div id="msg">
         <pre></pre>
       </div>
@@ -42,11 +56,29 @@
         };
 news.push (msg);
         document.querySelector("form").reset();
-        document.querySelector("pre").textContent = JSON.stringify(news, "\t", 2);
+        //document.querySelector("pre").textContent = JSON.stringify(news, "\t", 2);
       };
       document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("update").addEventListener("click", addNews);
       });
+
+      //this function goes through each item in the array and creates a news card
+      function updateNews()
+    {
+        document.querySelector('#news-items').innerHTML = ''; //reset old content so each time it reprints every item in the array
+        for (let item of news)
+        {
+            const template = document.getElementById("news-item").content.cloneNode(true);
+            template.querySelector('.card-title').innerText = item.title;
+            template.querySelector('.card-text').innerText = item.content;
+            document.querySelector('#news-items').appendChild(template);  
+        } 
+        console.log('updated news items')
+    }
+
+    //the news cards are updated every 5 seconds
+    let newsInterval = setInterval(updateNews, 5000);      
+
     </script>
   </body>
 </html>
