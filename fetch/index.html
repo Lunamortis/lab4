@@ -1,0 +1,52 @@
+<html>
+    <template id="jsonpost">
+        <div class="post-content">
+            <h2>Title</h2>
+            <div class="body"></div>
+        </div>
+    </template>     
+
+<head>
+<title>Hello</title>
+<style>
+    body { font-family: sans-serif; background: lightskyblue; }
+    #post-list { display: flex; flex-wrap: wrap; }
+    #post-list .post-content { background: #eee; box-shadow: 0 0 10px 5px rgba(0,0,0,0.1); width: 20%; padding: 1em; margin: 1em; flex-grow: 1; }
+</style>
+</head>
+
+<body>
+
+<h1>Example JSON API</h1>
+<div><input name="numposts" id="numposts" type="number" value="10" ><button onclick="getPosts()">Get Posts</button></div>
+
+<div id="post-list"></div>
+</body>
+<script>
+    //gets required amount of posts from jsonplaceholder using fetch, then uses the json response to populate cards
+    function getPosts()
+    {
+        let numposts = document.getElementById('numposts').value;
+        numposts = (parseInt(numposts) > 0) ? parseInt(numposts) : 10; //default is 10
+        document.querySelector('#post-list').innerHTML = 'loading '+numposts+' posts...'; 
+
+        fetch('https://jsonplaceholder.typicode.com/posts?_limit='+numposts)
+        .then((response) => response.json())
+        .then(function(json) {
+            console.log(json);
+            document.querySelector('#post-list').innerHTML = ''; 
+
+            for (let post of json)
+            {
+                console.log(post);
+
+                const template = document.getElementById("jsonpost").content.cloneNode(true);
+                template.querySelector('h2').innerText = '#'+post.id+': '+ post.title;
+                template.querySelector('.body').innerText = post.body;
+                document.querySelector('#post-list').appendChild(template);     
+            }
+        });
+    }
+
+</script>
+</html>
